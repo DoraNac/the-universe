@@ -20,7 +20,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
 
-  background-image: url(https://wallpapers.com/images/hd/4k-ultra-hd-galaxy-forming-star-b2929y0870szw7xq.jpg);
+ background-image: url(https://media.istockphoto.com/id/1461048693/vector/background-with-stars-vector-pattern-night-sky-filled-with-lots-of-stars-boho-star-universe.jpg?s=612x612&w=0&k=20&c=ro9UOVAl3-fhW5a_9NNhsqsBf8AgMI6XM_5KJsW8gro=);
   background-size: cover;
   animation: galaxyAnimation 600s linear infinite;
 }
@@ -39,37 +39,7 @@ h1 {
   line-height: 1.1;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
 
  /*  */
 
@@ -93,17 +63,6 @@ h1 {
   color: #e7e7e7;
 }
 
-/* input[type="text"] {
-  padding: 10px;
-  font-size: 1rem;
-  margin-bottom: 10px;
-} */
-
-/* .buttonContainer{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-} */
 
 button {
   margin: 10px;

@@ -86,7 +86,7 @@ const RegisterLogin = () => {
           <button>Log in</button>
         </Link>
         <p className="auth-switch">
-          Don't have an account yet? <Link to="">registere here!</Link>
+          Don't have an account? <Link to="">registere here!</Link>
         </p>
       </div>
     </div>

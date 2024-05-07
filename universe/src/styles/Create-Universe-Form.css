@@ -1,0 +1,152 @@
+.createUniverseContainer {
+    display: flex;
+    justify-content: center;
+   
+  }
+  
+  .UniverseForm {
+    width: 600px;
+    margin: 70px 10px;
+    padding: 30px;
+    background: #5c5757;
+    border-radius: 8px;
+    color: #fff;
+    box-sizing: border-box;
+  }
+  
+  .UniverseForm h2 {
+    text-align: left;
+    margin-bottom: 40px;
+    font-size: 24px;
+  }
+  
+  .UniverseForm input[type="text"],
+  .UniverseForm input[type="file"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ebebeb;
+    color: #3b3b3b;
+  }
+  
+  .UniverseForm input[type="text"]::placeholder,
+  .UniverseForm input[type="file"]::placeholder {
+    color: #2b2b2b;
+  }
+  
+  .UniverseForm button {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ad5ada;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .UniverseForm button:hover {
+    background: #733994;
+  }
+  
+  .UniverseForm button:focus {
+    outline: none;
+  }
+  
+  .auth-switch {
+    text-align: left;
+    font-size: 14px;
+  }
+  
+  .auth-switch a {
+    color: #fff;
+  }
+  
+  .createUniverseContainer {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .UniverseForm {
+    width: 600px;
+    margin: 70px 10px;
+    padding: 30px;
+    background: #5c5757;
+    border-radius: 8px;
+    color: #fff;
+    box-sizing: border-box;
+  }
+  
+  .UniverseForm h2 {
+    text-align: left;
+    margin-bottom: 40px;
+    font-size: 24px;
+  }
+  
+  .UniverseForm input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ebebeb;
+    color: #3b3b3b;
+  }
+  
+  .UniverseForm button {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ad5ada;;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .background-dropdown {
+    position: relative;
+  }
+  
+  .dropdown-button {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 4px;
+    background: #8649a4;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    z-index: 1;
+  }
+  
+  .dropdown-content img {
+    display: block;
+    width: 100%;
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  .dropdown-content img:hover {
+    background-color: #ddd;
+  }
+  
+  .show {
+    display: block;
+  }
+  
