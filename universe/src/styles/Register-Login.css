@@ -1,0 +1,76 @@
+.registerLoginContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.registrationForm,
+.loginForm {
+  width: 300px;
+  margin: 70px 10px;
+  padding: 40px;
+  background: #5c5757;
+  border-radius: 8px;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+.registrationForm h2,
+.loginForm h2 {
+  text-align: left;
+  margin-bottom: 40px;
+  font-size: 24px;
+}
+
+.registrationForm input[type="text"],
+.registrationForm input[type="email"],
+.registrationForm input[type="password"],
+.loginForm input[type="text"],
+.loginForm input[type="email"],
+.loginForm input[type="password"] {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: #ebebeb;
+  color: #3b3b3b;
+}
+
+.registrationForm input[type="text"]::placeholder,
+.registrationForm input[type="email"]::placeholder,
+.registrationForm input[type="password"]::placeholder,
+.loginForm input[type="text"]::placeholder,
+.loginForm input[type="email"]::placeholder,
+.loginForm input[type="password"]::placeholder {
+  color: #2b2b2b;
+}
+
+.registrationForm button,
+.loginForm button {
+  width: calc(100% - 20px);
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background: #62929a;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.registrationForm button:hover,
+.loginForm button:hover {
+  background: #334f53;
+}
+
+.registrationForm button:focus,
+.loginForm button:focus {
+  outline: none;
+}
+
+.auth-switch {
+  text-align: center;
+}
+
+.auth-switch a {
+  color: #fff;
+}
