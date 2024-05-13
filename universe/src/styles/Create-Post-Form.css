@@ -1,0 +1,52 @@
+.mainPostForm {
+  max-width: 600px;
+  margin: 70px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.input {
+  margin-bottom: 15px;
+}
+
+.input input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.canvas-container {
+  width: 600px !important;
+}
+
+.canvas-container canvas {
+  width: 100% !important;
+}
+
+.canvas-container:hover .deleteButton {
+  display: block;
+}
+
+.modes {
+  display: flex;
+  width: 100px;
+}
+.save {
+  display: flex;
+}
+
+.input .title h1{
+    color: black;
+    font-size: 26px;
+}
+
+.p{
+    color: black;
+    font-size: 16px;
+}
