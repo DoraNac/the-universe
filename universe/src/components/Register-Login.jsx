@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-// import { registerUser } from "../services/api";
+import { registerUser, loginUser } from "../services/apis";
 import "../styles/Register-Login.css";
 
 const RegisterLogin = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
 
-  const handleSubmit = async (e) => {
+  const handleRegisterSubmit = async (e) => {
     e.preventDefault();
 
     if (!name || !email || !password) {
@@ -19,12 +21,30 @@ const RegisterLogin = () => {
     }
 
     try {
-      await registerUser(name, email, password);
-      setSuccessMessage(
-        "Registration successful! Now log into your account!"
-      );
+      const data = await registerUser(name, email, password);
+      setSuccessMessage(data.message);
       setTimeout(() => {
-        window.location.href = "/login";
+        window.location.href = "/register";
+      }, 2000);
+
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!loginEmail || !loginPassword) {
+      setError("Email and password are required.");
+      return;
+    }
+
+    try {
+      const data = await loginUser(loginEmail, loginPassword);
+      setSuccessMessage("Login successful!");
+      setTimeout(() => {
+        window.location.href = "/createorexplore";
       }, 2000);
     } catch (error) {
       setError(error.message);
@@ -39,7 +59,7 @@ const RegisterLogin = () => {
         {successMessage && (
           <p className="success-message">{successMessage}</p>
         )}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleRegisterSubmit}>
           <input
             type="text"
             placeholder="Name"
@@ -61,32 +81,33 @@ const RegisterLogin = () => {
           <button type="submit">Register</button>
         </form>
         <p className="auth-switch">
-          Already have an account? <Link to="">Log in!</Link>
+          Already have an account? <Link to="/register">Log in!</Link>
         </p>
       </div>
 
       <div className="loginForm">
         <h2>Log in</h2>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={name}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-    
-
-        <Link to="/homepage">
-          {" "}
-          <button>Log in</button>
-        </Link>
+        {error && <p className="error-message">{error}</p>}
+        {successMessage && (
+          <p className="success-message">{successMessage}</p>
+        )}
+        <form onSubmit={handleLoginSubmit}>
+          <input
+            type="email"
+            placeholder="Email"
+            value={loginEmail}
+            onChange={(e) => setLoginEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={loginPassword}
+            onChange={(e) => setLoginPassword(e.target.value)}
+          />
+          <button type="submit">Log in</button>
+        </form>
         <p className="auth-switch">
-          Don't have an account? <Link to="">registere here!</Link>
+          Don't have an account? <Link to="/register">Register here!</Link>
         </p>
       </div>
     </div>
