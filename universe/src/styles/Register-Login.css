@@ -1,6 +1,7 @@
 .registerLoginContainer {
   display: flex;
   justify-content: center;
+  gap: 40px;
 }
 
 .registrationForm,
@@ -8,10 +9,12 @@
   width: 300px;
   margin: 70px 10px;
   padding: 30px;
-  background: #5c5757;
-  border-radius: 8px;
-  color: #fff;
+
   box-sizing: border-box;
+
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
 }
 
 .registrationForm h2,
@@ -19,6 +22,7 @@
   text-align: left;
   margin-bottom: 40px;
   font-size: 24px;
+  color: black;
 }
 
 .registrationForm input[type="text"],
@@ -30,7 +34,7 @@
   width: calc(100% - 20px);
   padding: 10px;
   margin-bottom: 15px;
-  border: none;
+  border: 1px solid #ccc;
   border-radius: 4px;
   background-color: #ebebeb;
   color: #3b3b3b;
@@ -67,12 +71,11 @@
   outline: none;
 }
 
-.auth-switch {
-
-  text-align: left;
-  font-size: 14px;
+.loginForm button {
+  margin-top: 60px;
 }
 
-.auth-switch a {
-  color: #fff;
+
+.success-message{
+  color: red;
 }

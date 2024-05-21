@@ -4,7 +4,7 @@
 }
 
 .UniverseForm {
-  max-width: 600px;
+width: 600px;
   margin: 70px;
   padding: 20px;
   border: 1px solid #ccc;
@@ -16,10 +16,18 @@
   text-align: left;
   color: black;
   font-size: 26px;
+  margin-top: -8px;
 }
 .UniverseForm p{
     color: black;
+    margin-bottom: -4px;
+   
+}
 
+.UniverseForm h3{
+  color: black;
+
+  margin: 5px;
 }
 
 .UniverseForm input[type="text"],

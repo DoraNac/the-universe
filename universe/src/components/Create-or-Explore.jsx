@@ -5,10 +5,10 @@ const CreateOrExplore = () => {
   return (
     <div className="main">
       <h2 className="quoteTitle">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Thank you  for joining ///. Start your journey by creating your universe or explore others
       </h2>
       <div className="buttonContainer">
-        <Link to="/createUniverse">
+        <Link to="/universe">
           {" "}
           <button>Create universe</button>
         </Link>

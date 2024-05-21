@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { createUniverse } from "../services/apis";
-import "../styles/Create-Universe-Form.css";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { createUniverse, getAllUniverses } from "../services/apis";
 
 const CreateUniverse = () => {
   const [name, setName] = useState("");
@@ -8,7 +8,7 @@ const CreateUniverse = () => {
   const [backgroundFile, setBackgroundFile] = useState(null);
   const [backgroundURL, setBackgroundURL] = useState("");
   const [error, setError] = useState(null);
-  const [successMessage, setSuccessMessage] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,14 +19,35 @@ const CreateUniverse = () => {
     }
 
     try {
-      const background = backgroundURL || backgroundFile.name;
-      const data = await createUniverse(name, description, background);
+      const formData = new FormData();
+      formData.append("titleUniverse", name);
+      formData.append("descriptionUniverse", description);
+      if (backgroundFile) {
+        formData.append("backgroundUniverse", backgroundFile);
+      } else {
+        formData.append("backgroundUniverse", backgroundURL);
+      }
 
-      setSuccessMessage(data.message);
-      setError(null); 
+      const response = await createUniverse(formData);
+
+      if (response.message !== "This is your universe") {
+        throw new Error("Failed to create universe");
+      }
+
+      // Fetch all universes to find the newly created one
+      const universes = await getAllUniverses();
+      const createdUniverse = universes.find(universe =>
+        universe.titleUniverse === name &&
+        universe.descriptionUniverse === description
+      );
+
+      if (createdUniverse) {
+        navigate(`/universe/${createdUniverse.id}`);
+      } else {
+        throw new Error("Newly created universe not found");
+      }
     } catch (error) {
       setError(error.message);
-      setSuccessMessage(null); 
     }
   };
 
@@ -44,35 +65,30 @@ const CreateUniverse = () => {
       <div className="UniverseForm">
         <h2>Create your universe</h2>
         {error && <p className="error-message">{error}</p>}
-        {successMessage && <p className="success-message">{successMessage}</p>}
         <form onSubmit={handleSubmit}>
-          <p>Universe name</p>
+          <h3>Universe name</h3>
           <input
             type="text"
             placeholder="Name of your universe"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <p>Universe description</p>
+          <h3>Universe description</h3>
           <input
             type="text"
             placeholder="Description of your universe"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
-          <p>Universe background</p>
+          <h3>Universe background</h3>
           <p>Import file</p>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleFileChange}
-          />
+          <input type="file" accept="image/*" onChange={handleFileChange} />
           <p>Or enter URL</p>
           <input
             type="text"
             placeholder="Enter image URL"
             value={backgroundURL}
-            onChange={handleURLChange}
+            onChange={(e) => handleURLChange(e)}
           />
           <button type="submit">Create universe</button>
         </form>

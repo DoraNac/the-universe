@@ -18,7 +18,7 @@
   color: rgba(255, 255, 255, 0.87);
 }
 
-/* Remove --star-shadow from #root */
+
 #root {
   display: flex;
   align-items: center;
@@ -26,7 +26,7 @@
   min-height: 100vh;
 }
 
-/* Add any other styles you need */
+
 
 
 body {
@@ -47,17 +47,6 @@ h1 {
   justify-content: flex-start;
   color: #e7e7e7;
 }
-
-
-/* h1 {
-  font-size: 4rem;
-  margin-bottom: 20px;
-
-  display: flex;
-  justify-content: flex-start;
-  color: #e7e7e7;
-} */
-
 
 button {
   margin: 10px;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { registerUser, loginUser } from "../services/apis";
 import "../styles/Register-Login.css";
 
@@ -11,6 +11,8 @@ const RegisterLogin = () => {
   const [loginPassword, setLoginPassword] = useState("");
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
+
+  const navigate = useNavigate();
 
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
@@ -26,7 +28,6 @@ const RegisterLogin = () => {
       setTimeout(() => {
         window.location.href = "/register";
       }, 2000);
-
     } catch (error) {
       setError(error.message);
     }
@@ -44,7 +45,7 @@ const RegisterLogin = () => {
       const data = await loginUser(loginEmail, loginPassword);
       setSuccessMessage("Login successful!");
       setTimeout(() => {
-        window.location.href = "/createorexplore";
+        navigate("/createorexplore", { replace: true });
       }, 2000);
     } catch (error) {
       setError(error.message);
@@ -56,9 +57,7 @@ const RegisterLogin = () => {
       <div className="registrationForm">
         <h2>Register</h2>
         {error && <p className="error-message">{error}</p>}
-        {successMessage && (
-          <p className="success-message">{successMessage}</p>
-        )}
+        {successMessage && <p className="success-message">{successMessage}</p>}
         <form onSubmit={handleRegisterSubmit}>
           <input
             type="text"
@@ -80,17 +79,11 @@ const RegisterLogin = () => {
           />
           <button type="submit">Register</button>
         </form>
-        <p className="auth-switch">
-          Already have an account? <Link to="/register">Log in!</Link>
-        </p>
       </div>
-
       <div className="loginForm">
         <h2>Log in</h2>
         {error && <p className="error-message">{error}</p>}
-        {successMessage && (
-          <p className="success-message">{successMessage}</p>
-        )}
+        {successMessage && <p className="success-message">{successMessage}</p>}
         <form onSubmit={handleLoginSubmit}>
           <input
             type="email"
@@ -106,9 +99,6 @@ const RegisterLogin = () => {
           />
           <button type="submit">Log in</button>
         </form>
-        <p className="auth-switch">
-          Don't have an account? <Link to="/register">Register here!</Link>
-        </p>
       </div>
     </div>
   );

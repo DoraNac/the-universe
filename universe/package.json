@@ -1,7 +1,7 @@
 {
   "name": "intro-react",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -16,7 +16,8 @@
     "lottie-web": "^5.12.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.23.0"
+    "react-router-dom": "^6.23.1",
+    "universal-cookie": "^7.1.4"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
@@ -27,5 +28,6 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "vite": "^5.2.0"
-  }
+  },
+  "proxy": "https://super-blog-application-a8d092f788b3.herokuapp.com"
 }
