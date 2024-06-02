@@ -25,7 +25,12 @@ const CreateUniverse = () => {
       if (backgroundFile) {
         formData.append("backgroundUniverse", backgroundFile);
       } else {
+      
         formData.append("backgroundUniverse", backgroundURL);
+      }
+
+      for (const [key, value] of formData.entries()) {
+        console.log(`${key}: ${value}`);
       }
 
       const response = await createUniverse(formData);
@@ -34,11 +39,11 @@ const CreateUniverse = () => {
         throw new Error("Failed to create universe");
       }
 
-      // Fetch all universes to find the newly created one
       const universes = await getAllUniverses();
-      const createdUniverse = universes.find(universe =>
-        universe.titleUniverse === name &&
-        universe.descriptionUniverse === description
+      const createdUniverse = universes.find(
+        (universe) =>
+          universe.titleUniverse === name &&
+          universe.descriptionUniverse === description
       );
 
       if (createdUniverse) {
@@ -50,6 +55,8 @@ const CreateUniverse = () => {
       setError(error.message);
     }
   };
+
+
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];

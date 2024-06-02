@@ -1,10 +1,16 @@
 .mainPostForm {
- max-width: 600px;
-  margin: 70px;
+  max-width: 900px;
+  margin: 70px auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: #f9f9f9;
+  text-align: center;
+  
+}
+
+.mainPostForm h1{
+  font-size: 26px;
 }
 
 .input {
@@ -12,7 +18,7 @@
 }
 
 .input input[type="text"] {
-  width: 100%;
+  width: 300px;
   padding: 10px;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -21,32 +27,69 @@
   box-sizing: border-box;
 }
 
+.modes {
+  display: flex;
+  justify-content: center;
+  width: 400px;
+  margin-bottom: 15px;
+}
+
+.modes button {
+  font-size: 18px;
+  height: 30px;
+  margin: 5 5px;
+ 
+
+ 
+}
+
 .canvas-container {
-  width: 600px !important;
+  width: 70%;
+  margin-bottom: 15px;
+  overflow: hidden;
 }
 
 .canvas-container canvas {
-  width: 100% !important;
+  width: 100%;
 }
 
-.canvas-container:hover .deleteButton {
-  display: block;
-}
-
-.modes {
+.search-gif {
   display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.search-gif input[type="text"] {
+  width: calc(100% - 100px);
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.search-results {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.search-results img {
   width: 100px;
-}
-.save {
-  display: flex;
-}
-
-.input .title h1{
-    color: black;
-    font-size: 26px;
+  height: 100px;
+  margin: 5px;
+  cursor: pointer;
 }
 
-.p{
-    color: black;
-    font-size: 16px;
+.mainPostForm h1 {
+  color: black;
+  font-size: 3rem;
 }
+
+
+.saveButton{
+  width: 500px;
+}
+ 

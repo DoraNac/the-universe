@@ -78,7 +78,7 @@ export const createUniverse = async (formData) => {
     }
 
     const data = await response.json();
-    console.log("Create Universe Response:", data); // Log the response
+    console.log("Create Universe Response:", data); // response
     return data;
   } catch (error) {
     throw new Error(
@@ -123,14 +123,88 @@ export const getUniverseById = async (id) => {
     });
 
     if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.message || "Failed to fetch universe");
+      if (response.status === 404) {
+        throw new Error("No universe found");
+      } else {
+        const error = await response.json();
+        throw new Error(error.message || "Failed to fetch universe");
+      }
     }
 
-    return await response.json();
+    const data = await response.json();
+    console.log("API Response Data:", data); //
+    return data;
   } catch (error) {
+    console.error("Error fetching universe:", error); //
     throw new Error(
       error.message || "An error occurred while fetching the universe"
     );
   }
 };
+
+
+
+
+// CREATE POST
+export const createPost = async (formData) => {
+  try {
+    const token = getTokenFromCookies();
+
+    const response = await fetch(`${BASE_URL}/api/posts`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || "Failed to create post");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error(
+      error.message || "An error occurred while creating the post"
+    );
+  }
+};
+
+
+
+
+
+
+
+// GET POSTS BY USER ID
+export const getPostsByUserId = async (userId) => {
+  try {
+    const token = getTokenFromCookies();
+    const response = await fetch(`${BASE_URL}/api/posts/${userId}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      if (response.status === 404) {
+        return { posts: [] };
+      } else {
+        const error = await response.json();
+        throw new Error(error.message || "Failed to fetch posts");
+      }
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    throw new Error(error.message || "An error occurred while fetching posts");
+  }
+};
+
+
+

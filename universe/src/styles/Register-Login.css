@@ -55,7 +55,7 @@
   padding: 10px;
   border: none;
   border-radius: 4px;
-  background-color: #ad5ada;
+  background-color: #252792;
   color: #fff;
   font-size: 16px;
   cursor: pointer;
@@ -63,7 +63,7 @@
 
 .registrationForm button:hover,
 .loginForm button:hover {
-  background: #8649a4;
+  background: #549fdd;
 }
 
 .registrationForm button:focus,
@@ -77,5 +77,9 @@
 
 
 .success-message{
+  color: green;
+}
+
+.error-message{
   color: red;
 }

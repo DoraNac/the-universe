@@ -1,9 +1,12 @@
 import React, { useRef, useEffect, useState } from "react";
 import { fabric } from "fabric";
 import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 import "../styles/Create-Post-Form.css";
+import { createPost } from "../services/apis";
 
 const PostForm = () => {
+  const { universeId } = useParams();
   const canvasRef = useRef(null);
   const [canvas, setCanvas] = useState(null);
   const [mode, setMode] = useState("brush");
@@ -13,12 +16,14 @@ const PostForm = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [links, setLinks] = useState("");
+  const [selectedGifUrl, setSelectedGifUrl] = useState("");
+  const navigate = useNavigate();
   const GIPHY_API_KEY = "Q8DTeBEDyIR4p56N9i5Eb6bPJ7M3LUwR";
 
   useEffect(() => {
     const newCanvas = new fabric.Canvas(canvasRef.current, {
       width: 800,
-      height: 600,
+      height: 400,
       backgroundColor: "#fff",
     });
 
@@ -48,17 +53,45 @@ const PostForm = () => {
     };
   }, [canvas]);
 
-  const handleSavePost = () => {
-    const dataUrl = canvas.toDataURL();
-    const post = {
-      title,
-      description,
-      links,
-      canvas: dataUrl,
-      sticker: searchTerm,
-    };
-  
-    console.log("Post Data:", JSON.stringify(post));
+  const base64ToBlob = (base64, type = "image/png") => {
+    const byteCharacters = atob(base64.split(",")[1]);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    return new Blob([byteArray], { type });
+  };
+
+  const handleSavePost = async () => {
+    const dataUrl = canvas.toDataURL("image/png");
+    const canvaBlob = base64ToBlob(dataUrl);
+    const imageBlob = await fetch(selectedGifUrl).then((r) => r.blob());
+
+    const formData = new FormData();
+    // formData.append("universeId", universeId);
+    formData.append("title", title);
+    formData.append("content", description);
+    formData.append("link", links);
+    formData.append("canvaUrl", canvaBlob, "canvas.png");
+    formData.append("imageUrl", imageBlob, "image.gif");
+
+    // Log form data before sending it to the backend
+    for (const [key, value] of formData.entries()) {
+   
+    }
+
+    try {
+      const response = await createPost(formData);
+
+      if (response.message === "Posted !") {
+        navigate(`/universe/${universeId}`);
+      } else {
+        throw new Error("Failed to save post");
+      }
+    } catch (error) {
+      console.error("Error saving post:", error);
+    }
   };
 
   const handleBrushMode = () => {
@@ -105,126 +138,96 @@ const PostForm = () => {
     }
   };
 
-  const handleDeleteObject = () => {
-    const activeObject = canvas.getActiveObject();
-    if (activeObject) {
-      canvas.remove(activeObject);
-    }
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
   };
 
   const searchGifs = async () => {
     try {
       const response = await axios.get(
-        `https://api.giphy.com/v1/stickers/search?api_key=${GIPHY_API_KEY}&q=${searchTerm}&limit=5`
+        `https://api.giphy.com/v1/gifs/search?api_key=${GIPHY_API_KEY}&q=${encodeURIComponent(
+          searchTerm
+        )}&limit=10`
       );
+
       setSearchResults(response.data.data);
       setShowSearchResults(true);
     } catch (error) {
-      console.error("Error searching stickers:", error);
+      console.error("Error searching gifs:", error);
     }
   };
 
   const handleGifSelect = (gif) => {
-    const gifId = gif.id;
-    const newStickerUrl = `https://i.giphy.com/${gifId}.webp`;
-    setSearchTerm(newStickerUrl);
+    const selectedUrl = gif.images.fixed_height.url;
+    setSelectedGifUrl(selectedUrl);
+    setSearchTerm(selectedUrl);
     setShowSearchResults(false);
-
-    // console.log("Selected Sticker URL:", newStickerUrl);
-  };
-
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
   };
 
   return (
     <div className="mainPostForm">
+      <h1>Create Post</h1>
       <div className="input">
-        <div className="title">
-          <h1>Create your post</h1>
-        </div>
-        <p className="p">Post title</p>
         <input
           type="text"
-          placeholder="Title"
+          placeholder="Post Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-        <p className="p">Post description</p>
+      </div>
+      <div className="input">
         <input
           type="text"
-          placeholder="Description"
+          placeholder="Post description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
       </div>
-      <div className="modes">
-        <button
-          className={mode === "brush" ? "active" : ""}
-          onClick={handleBrushMode}
-        >
-          Brush
-        </button>
-        <button
-          className={mode === "text" ? "active" : ""}
-          onClick={handleTextMode}
-        >
-          Text
-        </button>
-        <button
-          className={mode === "image" ? "active" : ""}
-          onClick={handleImageMode}
-        >
-          Image
-        </button>
-        <button className="deleteButton" onClick={handleDeleteObject}>
-          Delete
-        </button>
-      </div>
       <div className="input">
-        {mode === "image" ? (
-          <input type="file" onChange={handleImageUpload} />
-        ) : null}
-      </div>
-
-      <div className="canvas">
-        <canvas ref={canvasRef}></canvas>
-      </div>
-      <div className="input">
-        <p className="p">Links to share</p>
         <input
           type="text"
-          placeholder="Links"
+          placeholder="Share a link"
           value={links}
           onChange={(e) => setLinks(e.target.value)}
         />
       </div>
-      <div className="input">
-        <p className="p">Select a sticker for your post</p>
+      <div className="modes">
+        <button onClick={handleBrushMode}>Brush</button>
+        <button onClick={handleTextMode}>Text</button>
+        <button onClick={handleImageMode}>Image</button>
+        <input
+          type="file"
+          onChange={handleImageUpload}
+          style={{ display: mode === "image" ? "block" : "none" }}
+        />
+      </div>
+      <div className="canvas-container">
+        <canvas ref={canvasRef}></canvas>
+      </div>
+      <div className="search-gif input">
         <input
           type="text"
-          placeholder="Search by keywords.."
+          placeholder="Search for stickers"
           value={searchTerm}
           onChange={handleSearchChange}
         />
         <button onClick={searchGifs}>Search</button>
       </div>
       {showSearchResults && (
-        <div className="gifResults">
+        <div className="search-results">
           {searchResults.map((gif) => (
             <img
               key={gif.id}
               src={gif.images.fixed_height.url}
               alt={gif.title}
               onClick={() => handleGifSelect(gif)}
-              style={{ cursor: "pointer" }}
             />
           ))}
         </div>
       )}
-      <div className="save">
-        <button onClick={handleSavePost}>Save Post</button>
-      </div>
+      <button className="saveButton" onClick={handleSavePost}>
+        Save Post
+      </button>
     </div>
   );
 };

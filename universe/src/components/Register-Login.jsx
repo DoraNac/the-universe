@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { registerUser, loginUser } from "../services/apis";
+import { registerUser, loginUser, getAllUniverses } from "../services/apis";
 import "../styles/Register-Login.css";
 
 const RegisterLogin = () => {
@@ -9,8 +9,10 @@ const RegisterLogin = () => {
   const [password, setPassword] = useState("");
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-  const [error, setError] = useState(null);
-  const [successMessage, setSuccessMessage] = useState(null);
+  const [registerError, setRegisterError] = useState(null);
+  const [loginError, setLoginError] = useState(null);
+  const [registerSuccessMessage, setRegisterSuccessMessage] = useState(null);
+  const [loginSuccessMessage, setLoginSuccessMessage] = useState(null);
 
   const navigate = useNavigate();
 
@@ -18,46 +20,62 @@ const RegisterLogin = () => {
     e.preventDefault();
 
     if (!name || !email || !password) {
-      setError("Name, email, and password are required.");
+      setRegisterError("Name, email, and password are required.");
       return;
     }
 
     try {
       const data = await registerUser(name, email, password);
-      setSuccessMessage(data.message);
+      setRegisterSuccessMessage(data.message);
       setTimeout(() => {
         window.location.href = "/register";
-      }, 2000);
+      }, 80000);
     } catch (error) {
-      setError(error.message);
+      setRegisterError(error.message);
     }
   };
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (!loginEmail || !loginPassword) {
-      setError("Email and password are required.");
+      setLoginError("Email and password are required.");
       return;
     }
-
+  
     try {
       const data = await loginUser(loginEmail, loginPassword);
-      setSuccessMessage("Login successful!");
-      setTimeout(() => {
+      setLoginSuccessMessage("Login successful!");
+  
+      // Fetch user's universes
+      const universes = await getAllUniverses();
+  
+      console.log("User's Universes:", universes); 
+  
+      const userUniverse = universes.find(universe => universe.owner === data.userId);
+  
+      if (userUniverse) {
+        // User has a universe, redirect to their universe/profile
+        navigate(`/universe/${userUniverse.id}`, { replace: true });
+      } else {
+    
         navigate("/createorexplore", { replace: true });
-      }, 2000);
+      }
     } catch (error) {
-      setError(error.message);
+      setLoginError(error.message);
     }
   };
+  
+
 
   return (
     <div className="registerLoginContainer">
       <div className="registrationForm">
         <h2>Register</h2>
-        {error && <p className="error-message">{error}</p>}
-        {successMessage && <p className="success-message">{successMessage}</p>}
+        {registerError && <p className="error-message">{registerError}</p>}
+        {registerSuccessMessage && (
+          <p className="success-message">{registerSuccessMessage}</p>
+        )}
         <form onSubmit={handleRegisterSubmit}>
           <input
             type="text"
@@ -82,8 +100,10 @@ const RegisterLogin = () => {
       </div>
       <div className="loginForm">
         <h2>Log in</h2>
-        {error && <p className="error-message">{error}</p>}
-        {successMessage && <p className="success-message">{successMessage}</p>}
+        {loginError && <p className="error-message">{loginError}</p>}
+        {loginSuccessMessage && (
+          <p className="success-message">{loginSuccessMessage}</p>
+        )}
         <form onSubmit={handleLoginSubmit}>
           <input
             type="email"
