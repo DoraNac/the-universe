@@ -1,0 +1,85 @@
+.registerLoginContainer {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.registrationForm,
+.loginForm {
+  width: 300px;
+  margin: 70px 10px;
+  padding: 30px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.registrationForm h2,
+.loginForm h2 {
+  text-align: left;
+  margin-bottom: 40px;
+  font-size: 24px;
+  color: black;
+}
+
+.registrationForm input[type="text"],
+.registrationForm input[type="email"],
+.registrationForm input[type="password"],
+.loginForm input[type="text"],
+.loginForm input[type="email"],
+.loginForm input[type="password"] {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #ebebeb;
+  color: #3b3b3b;
+}
+
+.registrationForm input[type="text"]::placeholder,
+.registrationForm input[type="email"]::placeholder,
+.registrationForm input[type="password"]::placeholder,
+.loginForm input[type="text"]::placeholder,
+.loginForm input[type="email"]::placeholder,
+.loginForm input[type="password"]::placeholder {
+  color: #2b2b2b;
+}
+
+.registrationForm button,
+.loginForm button {
+  width: calc(100% - 20px);
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #252792;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.registrationForm button:hover,
+.loginForm button:hover {
+  background: #549fdd;
+}
+
+.registrationForm button:focus,
+.loginForm button:focus {
+  outline: none;
+}
+
+.loginForm button {
+  margin-top: 60px;
+}
+
+
+.success-message{
+  color: green;
+}
+
+.error-message{
+  color: red;
+}
