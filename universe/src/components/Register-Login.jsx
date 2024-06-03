@@ -48,19 +48,19 @@ const RegisterLogin = () => {
       setLoginSuccessMessage("Login successful!");
   
       // Fetch user's universes
-      const universes = await getAllUniverses();
+      // const universes = await getAllUniverses();
   
-      console.log("User's Universes:", universes); 
+      // console.log("User's Universes:", universes); 
   
-      const userUniverse = universes.find(universe => universe.owner === data.userId);
+      // const userUniverse = universes.find(universe => universe.owner === data.userId);
   
-      if (userUniverse) {
-        // User has a universe, redirect to their universe/profile
-        navigate(`/universe/${userUniverse.id}`, { replace: true });
-      } else {
+      // if (userUniverse) {
+      //   // User has a universe, redirect to their universe/profile
+      //   navigate(`/universe/${userUniverse.id}`, { replace: true });
+      // } else {
     
         navigate("/createorexplore", { replace: true });
-      }
+     
     } catch (error) {
       setLoginError(error.message);
     }

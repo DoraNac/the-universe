@@ -1,0 +1,42 @@
+.detailpost{
+  margin-bottom: 0px;
+  width: 500px;
+ background-color: rgba(255, 255, 255, 0.212);
+}
+
+ .postmain{
+  width: 500px;
+  height: 400px;
+background-color: rgb(248, 248, 248);
+border-radius: none !important;
+ 
+}
+
+.detailpost h2{
+  font-size: 20px;
+  margin-bottom: 0px;
+  margin-left: 5px;
+}
+.linkpost{
+  width: 500px;
+  background-color: rgba(255, 255, 255, 0.212);
+
+
+}
+.linkpost a{
+  color: aliceblue;
+  font-size: 18px;
+  margin: 5px;
+
+}
+.postcat{
+  position: absolute;
+  top: 300px;
+  left: 400px;
+  width: 300px;
+}
+.postmain p{
+  margin-left: 20px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: black;
+}
