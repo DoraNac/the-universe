@@ -57,9 +57,9 @@ const UserProfile = () => {
 
   return (
     <div className="profile">
-      <div className="profile-header">
+      <div className="profile-header1">
         <h1>My Universe</h1>
-        <button onClick={toggleDetails}>Universe Details</button>
+        <button className="univbutton"  onClick={toggleDetails}>Universe Details</button>
       </div>
       {showDetails && (
         <div className="details">

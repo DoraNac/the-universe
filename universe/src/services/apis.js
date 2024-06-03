@@ -119,7 +119,10 @@ export const getUniverseById = async (id) => {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
+      // mode: "no-cors",
     });
 
     if (!response.ok) {
@@ -141,9 +144,6 @@ export const getUniverseById = async (id) => {
     );
   }
 };
-
-
-
 
 // CREATE POST
 export const createPost = async (formData) => {
@@ -171,12 +171,6 @@ export const createPost = async (formData) => {
     );
   }
 };
-
-
-
-
-
-
 
 // GET POSTS BY USER ID
 export const getPostsByUserId = async (userId) => {
@@ -206,5 +200,28 @@ export const getPostsByUserId = async (userId) => {
   }
 };
 
+// UPDATE UNIVERSE
+export const updateUniverse = async (id, formData) => {
+  try {
+    const token = getTokenFromCookies();
+    const response = await fetch(`${BASE_URL}/api/universe/${id}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+    console.log(response);
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || "Failed to update universe");
+    }
 
-
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error(
+      error.message || "An error occurred while updating the universe"
+    );
+  }
+};

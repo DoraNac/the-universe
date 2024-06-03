@@ -78,12 +78,14 @@ const PostForm = () => {
 
     // Log form data before sending it to the backend
     for (const [key, value] of formData.entries()) {
-   
+
     }
+
+
 
     try {
       const response = await createPost(formData);
-
+console.log(formData);
       if (response.message === "Posted !") {
         navigate(`/universe/${universeId}`);
       } else {
@@ -164,32 +166,35 @@ const PostForm = () => {
     setShowSearchResults(false);
   };
 
+ 
   return (
     <div className="mainPostForm">
       <h1>Create Post</h1>
-      <div className="input">
-        <input
-          type="text"
-          placeholder="Post Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-      </div>
-      <div className="input">
-        <input
-          type="text"
-          placeholder="Post description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-      </div>
-      <div className="input">
-        <input
-          type="text"
-          placeholder="Share a link"
-          value={links}
-          onChange={(e) => setLinks(e.target.value)}
-        />
+      <div className="input-container">
+        <div className="input">
+          <input
+            type="text"
+            placeholder="Post Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+        <div className="input">
+          <input
+            type="text"
+            placeholder="Post description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </div>
+        <div className="input">
+          <input
+            type="text"
+            placeholder="Share a link"
+            value={links}
+            onChange={(e) => setLinks(e.target.value)}
+          />
+        </div>
       </div>
       <div className="modes">
         <button onClick={handleBrushMode}>Brush</button>
@@ -231,5 +236,4 @@ const PostForm = () => {
     </div>
   );
 };
-
 export default PostForm;

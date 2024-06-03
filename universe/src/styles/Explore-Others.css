@@ -3,7 +3,7 @@
     margin: 0 auto;
     padding: 20px;
     background-color: #f9f9f9;
-    border-radius: 10px;
+
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     height: 400px;
     background-size: cover;
@@ -12,23 +12,29 @@
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   }
   
+.finalButton{
+  width: 200px;
+}
+
   .profile h2 {
     font-size: 24px;
     color: #333;
-    margin-bottom: 10px;
+    margin-bottom: -20px;
+    margin-left:80px;
   }
   
   .profile p {
     padding-left: 8px;
-    font-size: 16px;
+    font-size: 20px;
     color: #474545;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    margin-left: 75px;
   }
   
   .universeContainer img {
     max-width: 100%;
     height: auto;
-    border-radius: 10px;
+   
     margin-top: auto; 
     align-self: center;
   }
@@ -38,12 +44,15 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .explore-container h2 {
     font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
+    color: #d4d4d4;
+    margin-bottom: 0px;
   }
   
   .universes-list {
@@ -52,15 +61,19 @@
   }
   
   .universeContainer {
-    margin-bottom: 20px;
+    margin-bottom: 0px;
     background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+   
+  
+  }
+  .explore-container p{
+    color: #d4d4d4;
   }
   
   .universe-image {
     overflow: hidden;
-    border-radius: 8px 8px 0 0;
+ 
   }
   
   .universe-image img {
@@ -74,14 +87,14 @@
   }
   
   .universe-content h3 {
-    font-size: 20px;
+    font-size: 28px;
     color: #333;
     margin-bottom: 10px;
   }
   
   .universe-content p {
-    font-size: 16px;
-    color: #666;
+    font-size: 20px;
+    color: #c5c5c5;
     margin-bottom: 20px;
   }
   
@@ -100,8 +113,9 @@
   }
   
   .explore-container h1 {
-    font-size: 36px !important;
-    color: #333 !important;
+    font-size: 60px !important;
+    color: #dddddd !important;
     margin-bottom: 20px !important;
+   
   }
   

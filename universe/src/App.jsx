@@ -8,11 +8,13 @@ import CreateUniverse from "./components/Create-Universe-Form";
 // import SuccessfulUniverse from "./components/Successful-Universe";
 import UserProfile from "./components/User-Profile.jsx";
 import PostForm from "./components/Create-Post-Form";
-import EditUniverse from "./components/Edit-Universe-Form";
+import EditUniverse from "./components/EditUniverseForm.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import ExploreOthers from "./components/Explore-Others.jsx";
 import BackgroundAnimation from "./components/BackgroundAnimation";
 import BackgroundMusic from "./components/BackgroundMusic";
+import FinalOthers from "./components/FinalExploreOthers.jsx";
+import FinalPost from "./components/FinalExplorePost.jsx";
 
 function App() {
   return (
@@ -45,6 +47,22 @@ function App() {
             element={
               <PrivateRoute>
                 <CreateUniverse />
+              </PrivateRoute>
+            }
+          />
+              <Route
+            path="/finalpost"
+            element={
+              <PrivateRoute>
+                < FinalPost/>
+              </PrivateRoute>
+            }
+          />
+            <Route
+            path="/final"
+            element={
+              <PrivateRoute>
+                <FinalOthers />
               </PrivateRoute>
             }
           />
